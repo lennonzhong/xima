@@ -1,14 +1,11 @@
-import React, { type PropsWithChildren } from 'react';
+import React, { useEffect, type PropsWithChildren } from 'react';
 import {
   SafeAreaView,
-  StyleSheet,
   Text,
-  useColorScheme,
   View,
 } from 'react-native';
 
 import Config from "react-native-config";
-
 const Section: React.FC<
   PropsWithChildren<{
     title: string;
@@ -26,15 +23,25 @@ const Section: React.FC<
 
 const App = () => {
 
+
+  useEffect(() => {
+    getTestData();
+  }, [])
+
+  const getTestData = () => {
+    fetch("http://www.baidu.com").then((res: any) => {
+      return res.text()
+    }).then(res => {
+      console.log(res);
+
+    })
+  }
+
   return (
     <SafeAreaView>
       <Section title="Step One"></Section>
     </SafeAreaView>
   );
 };
-
-const styles = StyleSheet.create({
-
-});
 
 export default App;
